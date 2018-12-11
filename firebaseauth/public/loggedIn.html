@@ -19,11 +19,16 @@
 
     <div id="content">
         <img src="https://i.imgur.com/2bVTa1v.gif"></img>
+        <li ng-repeat='line in chats'>
+            {{line.from}} - {{line.body}}
+        </li>
     </div>
 
     <div id="form">
-        <form>
-
+        <form novalidate class="simple-form">
+            Name: <input type="text" ng-model="user.name" /><br /> 
+            Chat: <input type="text" ng-model="user.chat" /><br />
+            <input type="submit" ng-click="update(user)" value="Save" />
         </form>
     </div>
 </body>
