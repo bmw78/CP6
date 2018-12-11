@@ -40,11 +40,6 @@ function initApp() {
 			var token = result.credential.accessToken;
 			// [START_EXCLUDE]
 			document.getElementById('quickstart-oauthtoken').textContent = token;
-
-
-			var d = new Date();
-			d.setTime(d.getTime() + (30 * 1000));
-			document.cookie = "authToken=" + token + "; expires=" + d.toUTCString();
 		}
 		else {
 			document.getElementById('quickstart-oauthtoken').textContent = 'null';
@@ -76,6 +71,8 @@ function initApp() {
 	// [START authstatelistener]
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
+			window.open("loggedIn.html", "_self");
+			/*
 			// User is signed in.
 			var displayName = user.displayName;
 			var email = user.email;
@@ -89,12 +86,11 @@ function initApp() {
 			document.getElementById('quickstart-sign-in').textContent = 'Sign out';
 			document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
 			// [END_EXCLUDE]
-
-
-
-			CookieCheck();
+			*/
 		}
 		else {
+			window.open("", "_self");
+			/*
 			// User is signed out.
 			// [START_EXCLUDE]
 			document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
@@ -102,6 +98,7 @@ function initApp() {
 			document.getElementById('quickstart-account-details').textContent = 'null';
 			document.getElementById('quickstart-oauthtoken').textContent = 'null';
 			// [END_EXCLUDE]
+			*/
 		}
 		// [START_EXCLUDE]
 		document.getElementById('quickstart-sign-in').disabled = false;
