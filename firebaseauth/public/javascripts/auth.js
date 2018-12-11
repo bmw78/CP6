@@ -40,6 +40,11 @@ function initApp() {
 			var token = result.credential.accessToken;
 			// [START_EXCLUDE]
 			document.getElementById('quickstart-oauthtoken').textContent = token;
+
+
+			var d = new Date();
+			d.setTime(d.getTime() + (30 * 1000));
+			document.cookie = "authToken=" + token + "; expires=" + d.toUTCString();
 		}
 		else {
 			document.getElementById('quickstart-oauthtoken').textContent = 'null';
@@ -84,6 +89,10 @@ function initApp() {
 			document.getElementById('quickstart-sign-in').textContent = 'Sign out';
 			document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
 			// [END_EXCLUDE]
+
+
+
+			CookieCheck();
 		}
 		else {
 			// User is signed out.
@@ -104,3 +113,25 @@ function initApp() {
 window.onload = function() {
 	initApp();
 };
+
+function CookieCheck() {
+	if (AccessCookie("authToken") != "NULL") {
+		window.location = "loggedIn.html";
+	}
+}
+
+function AccessCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "NULL";
+}
